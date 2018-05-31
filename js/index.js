@@ -3,7 +3,7 @@ let fetchedVideos = fetch(`https://www.googleapis.com/youtube/v3/search?part=sni
   .then(resp => resp.json()).then(resp => {loadVideo(resp)})
 
 function loadVideo(resp){
-  vidResults.innerHTML += `<div class="well"><h3>${resp.etag}</h3> <button class="btn btn-success"> + </button></div>`
+  vidResults.innerHTML += `<div class="well"><h3>${resp.etag}</h3> <button class="btn btn-success btn-sm"> + </button></div>`
 
 
 }
