@@ -18,10 +18,12 @@
     vidResults.innerHTML = ``
 
     console.log('res',resp);
-    resp.items.map(v => vidResults.innerHTML += `<div class="col-sm-4"> <div class="card" style="width: 18rem;"><img class="card-img-top" src="${v.snippet.thumbnails.default.url}">  <div class="card-body">
+    resp.items.map(v => vidResults.innerHTML += `<div class="col-sm-5  vidResult"> <div class="card" style="width: 18rem;"> <iframe src="https://www.youtube.com/embed/${v.id.videoId}" width="320" height="180"></iframe>
+   <div class="card-body">
+
         <h5 class="card-title">${v.snippet.title}</h5>
         <h6 class="card-text">${v.snippet.description}</h6>
-        <button href="#" class="btn btn-primary btn-sm" onClick=saveVid()>Save</button>
+        <button type="button" href="#" class="btn btn-sm btn-success " onClick=saveVid()>Save</button>
       </div></div></div>`)
   }
 
