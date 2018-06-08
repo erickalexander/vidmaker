@@ -1,11 +1,12 @@
 var mykey = config.MY_KEY;
 
-  document.getElementById('myForm').addEventListener('submit',fetchVideos)
+  document.getElementById('myForm').addEventListener('submit',fetchVideosAPI)
 
   console.log("LOADINGG");
 
 
-  function fetchVideos(e){
+  function fetchVideosAPI(e){
+    console.log('innn');
     let searchTerm = document.getElementById('searchterm').value
     fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&key=${mykey}=${searchTerm}&type=video`)
       .then(resp => resp.json()).then(resp => {searchVideo(resp)})
@@ -34,10 +35,10 @@ var mykey = config.MY_KEY;
     console.log(e,'inside save vid');
 
     let vid = e.target.offsetParent.innerHTML
+    console.log(vid,'fff');
 
 
-
-    // savedVideos.innerHTML += `${e.target.offsetParent.innerHTML} <a onclick=deleteVid() class="btn btn-danger" href="#">Delete</a>`
+    // savedVideos.innerHTML += `<div class="col-sm-5  vidResult"> ${e.target.offsetParent.innerHTML} <a onclick=deleteVid() class="btn btn-danger" href="#">Delete</a></div>`
 
     let video = {
       vidHTML: vid
@@ -80,13 +81,14 @@ var mykey = config.MY_KEY;
 
 
   function fetchVideos(){
-
+    console.log("fetching Videos");
     let videos = JSON.parse(localStorage.getItem('videos'))
 
     let savedVideos = document.getElementById('savedVideos')
     savedVideos.innerHTML = ''
     videos.map(v => {
-      savedVideos.innerHTML += `${v.vidHTML} <a onclick=deleteVid() class="btn btn-danger" href="#">Delete</a>`
+      savedVideos.innerHTML += `<div class="col-sm-5  vidResult">${v.vidHTML} <a onclick=deleteVid() class="btn btn-danger" href="#">Delete</a></div>`
     })
+
 
   }
