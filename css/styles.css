@@ -82,3 +82,23 @@ body {
     border-bottom: 0;
   }
 }
+
+
+.searchContainer{
+  border: 1px solid black;
+  padding: 30px;
+  background-color: #BDC7C1
+}
+.btn-center{
+  margin: auto;
+  width: 20%
+}
+
+body{
+  background-color: #5A666B
+
+}
+
+h3{
+  color: #D48872
+}
