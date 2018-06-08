@@ -31,7 +31,8 @@
 
     console.log(e,'inside save vid');
 
-    savedVideos.innerHTML = e.target.offsetParent.innerHTML
+    let vid = e.target.offsetParent.innerHTML
+    savedVideos.innerHTML += e.target.offsetParent.innerHTML
 
     // let siteName = document.getElementById('sitename').value
     // let siteUrl = document.getElementById('siteurl').value
