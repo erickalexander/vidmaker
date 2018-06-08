@@ -32,7 +32,8 @@
     console.log(e,'inside save vid');
 
     let vid = e.target.offsetParent.innerHTML
-    savedVideos.innerHTML += e.target.offsetParent.innerHTML
+
+    savedVideos.innerHTML += `${e.target.offsetParent.innerHTML} <a onclick=deleteBookmark() class="btn btn-danger" href="#">Delete</a>`
 
     // let siteName = document.getElementById('sitename').value
     // let siteUrl = document.getElementById('siteurl').value
@@ -75,3 +76,15 @@
     savedVideos.innerHTML += `<div><h3>${res.etag}</h3> <button class="btn btn-success "> + </button></div>`
 
   }
+
+  // function fetchVideos(){
+  //
+  //   let videos = JSON.parse(localStorage.getItem('videos'))
+  //
+  //   let videoresults = document.getElementById('savedVideos')
+  //   videoresults.innerHTML = ''
+  //   let videosHTML = videos.map(v => {
+  //     videresults.innerHTML += v
+  //   })
+  //
+  // }
