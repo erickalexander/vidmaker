@@ -1,3 +1,5 @@
+var mykey = config.MY_KEY;
+
   document.getElementById('myForm').addEventListener('submit',fetchVideos)
 
   console.log("LOADINGG");
@@ -5,7 +7,7 @@
 
   function fetchVideos(e){
     let searchTerm = document.getElementById('searchterm').value
-    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyA33f7TdGW7pXSjQCPpiX-f4PNn-IGq73g&q=${searchTerm}&type=video`)
+    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&key=${mykey}=${searchTerm}&type=video`)
       .then(resp => resp.json()).then(resp => {searchVideo(resp)})
 
     e.preventDefault()
@@ -23,7 +25,7 @@
 
         <h5 class="card-title">${v.snippet.title}</h5>
         <h6 class="card-text">${v.snippet.description}</h6>
-        <button type="button" href="#" class="btn btn-sm btn-success " onClick="saveVid(event)">Save</button>
+        <button type="button" href="#" class="btn btn-sm btn-success " onclick="saveVid(event)">Save</button>
       </div></div></div>`)
   }
 
@@ -33,36 +35,36 @@
 
     let vid = e.target.offsetParent.innerHTML
 
-    savedVideos.innerHTML += `${e.target.offsetParent.innerHTML} <a onclick=deleteBookmark() class="btn btn-danger" href="#">Delete</a>`
 
-    // let siteName = document.getElementById('sitename').value
-    // let siteUrl = document.getElementById('siteurl').value
-    //
-    // let video = {
-    //   name: siteName,
-    //   url: siteUrl
-    // }
-    //
-    // if(localStorage.getItem('bookmarks') === null){
-    //   let bookmarks = []
-    //   bookmarks.push(bookmark)
-    //   //set to localStorage
-    //
-    //   localStorage.setItem('bookmarks',JSON.stringify(bookmarks))
-    // }
-    // else{
-    //   //get bookmarks from localStorage
-    //   let bookmarks = JSON.parse(localStorage.getItem('bookmarks'))
-    //   //add bookmark to array
-    //   bookmarks.push(bookmark)
-    //   localStorage.setItem('bookmarks',JSON.stringify(bookmarks))
-    //
-    // }
-    //
-    // //Re-fetch Bookmarks
-    // fetchBookmarks()
-    //
-    // //prevent form from submitting
+
+    // savedVideos.innerHTML += `${e.target.offsetParent.innerHTML} <a onclick=deleteVid() class="btn btn-danger" href="#">Delete</a>`
+
+    let video = {
+      vidHTML: vid
+    }
+
+    if(localStorage.getItem('videos') === null){
+      let videos = []
+      videos.push(video)
+      //set to localStorage
+
+      localStorage.setItem('videos',JSON.stringify(videos))
+    }
+    else{
+      //get bookmarks from localStorage
+      let videos = JSON.parse(localStorage.getItem('videos'))
+      //add bookmark to array
+      videos.push(video)
+      localStorage.setItem('videos',JSON.stringify(videos))
+
+    }
+
+    //Re-fetch Videos
+    fetchVideos()
+
+    //prevent form from submitting
+    e.preventDefault()
+
   }
 
 
@@ -72,19 +74,19 @@
 
   }
 
-  function loadVideo(res){
-    savedVideos.innerHTML += `<div><h3>${res.etag}</h3> <button class="btn btn-success "> + </button></div>`
-
+  function deleteVid(){
+    savedVideos.innerHTML = ''
   }
 
-  // function fetchVideos(){
-  //
-  //   let videos = JSON.parse(localStorage.getItem('videos'))
-  //
-  //   let videoresults = document.getElementById('savedVideos')
-  //   videoresults.innerHTML = ''
-  //   let videosHTML = videos.map(v => {
-  //     videresults.innerHTML += v
-  //   })
-  //
-  // }
+
+  function fetchVideos(){
+
+    let videos = JSON.parse(localStorage.getItem('videos'))
+
+    let savedVideos = document.getElementById('savedVideos')
+    savedVideos.innerHTML = ''
+    videos.map(v => {
+      savedVideos.innerHTML += `${v.vidHTML} <a onclick=deleteVid() class="btn btn-danger" href="#">Delete</a>`
+    })
+
+  }
